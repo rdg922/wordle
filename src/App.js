@@ -38,13 +38,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <div ref={this.myRef}/>
-          <input 
-          name="searchTxt" 
-          type="text" 
-          maxlength="512" 
-          id="txt" 
-          class="searchField"
-          />
       </div>
     );
   }

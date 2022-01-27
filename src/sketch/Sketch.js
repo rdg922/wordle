@@ -10,6 +10,7 @@ export default (p, {}) =>{
   const maxTries = 6;
   let enterPressed = false;
   let wordToGuess;
+  let typing = "";
 
   // p.preload = () => {
   //   wordsRaw = p.loadStrings(words);
@@ -25,7 +26,7 @@ export default (p, {}) =>{
 
   p.draw = () => {
     p.background(50);
-    
+    console.log(typing);
     for(let i = 0; i < maxTries; i++){
       for(let j = 0; j < letters; j++){
 
@@ -48,23 +49,32 @@ export default (p, {}) =>{
           p.fill(50);
           p.text(usedWords[i].charAt(j).toUpperCase(), (j+2)*75+8, (i+1)*75+3, 60, 60);
         }
-
+        if(i==attempts){
+          p.fill(120,120,120);
+          p.rect((j+2)*75, (i+1)*75, 60, 60);
+          if(j<=typing.length){
+            p.fill(50);
+            p.text(typing.charAt(j).toUpperCase(), (j+2)*75+8, (i+1)*75+3, 60, 60);
+          }
+        }
       }
     }
     
     if(enterPressed){
-      console.log(document.getElementById('txt').value);
+      console.log(typing);
 
-      let guess = document.getElementById('txt').value;
-      document.getElementById('txt').value='';
-
+      let guess = typing.toLowerCase();
+      
       if(guess.length==5&&(WORDS.includes(guess)||VALIDGUESSES.includes(guess))){
         usedWords.push(guess.toLowerCase());
         attempts++;
+        
         if(guess===wordToGuess)
         {
           //Finish the game here
         }
+        guess="";
+        typing="";
       }
 
       enterPressed=false; 
@@ -74,5 +84,13 @@ export default (p, {}) =>{
   document.addEventListener("keydown", function(event) {
     if(event.keyCode==13)
       enterPressed=true;
+    if(event.keyCode>=65&&event.keyCode<=90){
+      if(typing.length<5){
+        typing += String.fromCharCode(event.keyCode);
+      }
+    }
+    if(event.keyCode==8){
+      typing = typing.substr(0,typing.length-1);
+    }
   });
 }
