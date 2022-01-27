@@ -1,6 +1,6 @@
-# Collisions
+# Wordle remake
 
-Approximates the numbers of pi
+An attempt at recreating the game wordle, base code taken from https://github.com/rdg922/collisions
 
 # Getting Started with Create React App
 
