@@ -1,4 +1,5 @@
-import words from './wordsRefined.txt'
+// import words from './wordsRefined.txt'
+import { WORDS } from  './wordsSource.ts'
 
 export default (p, {}) =>{
   // TODO: read state from function parameters
@@ -10,12 +11,12 @@ export default (p, {}) =>{
   const maxTries = 6;
   let enterPressed = false;
 
-  p.preload = () => {
-    wordsRaw = p.loadStrings(words);
-  }
+  // p.preload = () => {
+  //   wordsRaw = p.loadStrings(words);
+  // }
 
   p.setup = () => {
-    console.log(wordsRaw);
+    console.log(WORDS);
     p.resizeCanvas(700,800);  
     p.textSize(60);
     p.textAlign(p.CENTER);
@@ -41,7 +42,7 @@ export default (p, {}) =>{
       console.log(document.getElementById('txt').value);
       let guess = document.getElementById('txt').value;
       document.getElementById('txt').value='';
-      if(guess.length==5&&wordsRaw.includes(guess)){
+      if(guess.length==5&&WORDS.includes(guess)){
         usedWords.push(guess.toUpperCase());
         attempts++;
       }
