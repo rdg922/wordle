@@ -1,51 +1,72 @@
 // import words from './wordsRefined.txt'
 import { WORDS } from  './wordsSource.ts'
+import { VALIDGUESSES } from './validGuesses.ts'
 
 export default (p, {}) =>{
   // TODO: read state from function parameters
-  let wordsRaw;
   let usedWords = [];
   let attempts = 0;
-  let input;
   const letters = 5;
   const maxTries = 6;
   let enterPressed = false;
+  let wordToGuess;
 
   // p.preload = () => {
   //   wordsRaw = p.loadStrings(words);
   // }
 
   p.setup = () => {
-    console.log(WORDS);
-    p.resizeCanvas(700,800);  
+    p.resizeCanvas(700,600);  
     p.textSize(60);
     p.textAlign(p.CENTER);
+    wordToGuess = WORDS[Math.round(Math.random()*WORDS.length-0.5)];
+    // console.log(wordToGuess);
   }
 
   p.draw = () => {
-    p.background(0);
+    p.background(50);
     
     for(let i = 0; i < maxTries; i++){
       for(let j = 0; j < letters; j++){
-        p.fill(150);
+
+        p.fill(255);
         p.rect((j+2)*75, (i+1)*75, 60, 60);
+
         if(i<attempts){
-          // console.log("here");
-          p.fill(255);
-          p.text(usedWords[i].charAt(j), (j+2)*75+5, (i+1)*75+3, 60, 60);
+          if(wordToGuess.includes(usedWords[i].charAt(j)))
+          {
+            if(wordToGuess.charAt(j)===usedWords[i].charAt(j)){
+              p.fill(0,255,0);
+              p.rect((j+2)*75, (i+1)*75, 60, 60);
+            }
+            else{
+              p.fill(255,255,0);
+              p.rect((j+2)*75, (i+1)*75, 60, 60);
+            }
+          }
+
+          p.fill(50);
+          p.text(usedWords[i].charAt(j).toUpperCase(), (j+2)*75+8, (i+1)*75+3, 60, 60);
         }
-        // console.log("test");
+
       }
     }
     
     if(enterPressed){
       console.log(document.getElementById('txt').value);
+
       let guess = document.getElementById('txt').value;
       document.getElementById('txt').value='';
-      if(guess.length==5&&WORDS.includes(guess)){
-        usedWords.push(guess.toUpperCase());
+
+      if(guess.length==5&&(WORDS.includes(guess)||VALIDGUESSES.includes(guess))){
+        usedWords.push(guess.toLowerCase());
         attempts++;
+        if(guess===wordToGuess)
+        {
+          //Finish the game here
+        }
       }
+
       enterPressed=false; 
     }
   }
