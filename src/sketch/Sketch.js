@@ -16,17 +16,23 @@ export default (p, {}) =>{
   //   wordsRaw = p.loadStrings(words);
   // }
 
+  function myFunction() {
+    document.getElementById('render').style.position = "relative";
+    document.getElementById('render').style.left = "50%";
+    document.getElementById('render').style.right = "50%";
+  }
+
   p.setup = () => {
     p.resizeCanvas(700,600);  
     p.textSize(60);
     p.textAlign(p.CENTER);
     wordToGuess = WORDS[Math.round(Math.random()*WORDS.length-0.5)];
+    myFunction();
     // console.log(wordToGuess);
   }
 
   p.draw = () => {
     p.background(50);
-    console.log(typing);
     for(let i = 0; i < maxTries; i++){
       for(let j = 0; j < letters; j++){
 

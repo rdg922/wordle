@@ -37,7 +37,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div ref={this.myRef}/>
+        <div ref={this.myRef} id='render'/>
       </div>
     );
   }
