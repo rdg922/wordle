@@ -9,4 +9,12 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-</script>
+
+render() {
+    return (
+      <div className="App">
+        <div ref={this.myRef} id='render'/>
+      </div>
+    );
+  }
+<script>
