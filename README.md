@@ -10,11 +10,11 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-render() {
-    return (
-      <div className="App">
-        <div ref={this.myRef} id='render'/>
-      </div>
-    );
-  }
-<script>
+// render() {
+//     return (
+//       <div className="App">
+//         <div ref={this.myRef} id='render'/>
+//       </div>
+//     );
+//   }
+</script>
